@@ -3,12 +3,13 @@ import glob
 import os
 import markdown
 #
-# Read in header file name
+# get project path
 #
-
-projectPath = 'C:/Users/Michael/Documents/GitHub/Modelling-active-particles'
-includePath = projectPath + '/include'
-
+projectPath = input('Input project directory:\n')
+#
+# get location of headers in project
+#
+includePath = projectPath + input("Input header file folder:\n")
 #
 # Create Project Description File
 #
