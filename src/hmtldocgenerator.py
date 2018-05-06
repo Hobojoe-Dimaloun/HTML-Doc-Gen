@@ -3,6 +3,10 @@ import glob
 import os
 import markdown
 #
+# C documentation generator
+#
+print("C documentation generator. Creates function documentation from header files (.h)")
+#
 # get project path
 #
 projectPath = input('Input project directory:\n')
