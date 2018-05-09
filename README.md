@@ -1,6 +1,6 @@
 # HTML-Doc-Gen
 
-C documentation generator.
+Documentation generator for C projects. The generator works by scraping the header files in the include folder for the functions available to the program. The generator then creates a new html file for each header file, and for each function with the files. The program will scrape any description of the functions from the header and put into a description section of the relevant html files.
 
 ## Usage
 
@@ -17,7 +17,7 @@ Finally it will ask for the location of the output documentation. This can be an
 
 C:/.../project/docs
 
-The program will then scrap the function names from each header file, along with any description following the function name.
+The program will then scrape the function names from each header file, along with any description following the function name.
 
 ## Header file formatting
 
