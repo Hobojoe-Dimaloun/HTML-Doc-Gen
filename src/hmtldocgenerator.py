@@ -56,11 +56,17 @@ with open(output + project +'.html','w') as projectFileHtml:
 			# Read in line by line
 			#
 			creation = False
+			pretext = ''
+			change = 0
 			for line in fileContent:
 				#
 				# Check if the line contains a function definition
 				#
-				if '(' in line and ')' in line:
+				if '(' in line and ')' in line and ';' and '//' not in line:
+					if change == 0:
+						headFileHtml.write(pretext)
+						change = 1
+
 					#
 					# Check if already parsing a function. If yes end parsing, write to file and start new
 					#
@@ -70,6 +76,7 @@ with open(output + project +'.html','w') as projectFileHtml:
 						creation = False
 						with open(htmlFileName, 'w') as htmlFile:
 							htmlFile.write(text)
+							htmlFile.write(markdown.markdown( '[' + headerFile + '](' +headerFilelink + '.html)'))
 					#
 					# strip function until only function name remains
 					#
@@ -79,7 +86,7 @@ with open(output + project +'.html','w') as projectFileHtml:
 
 					if '*' in htmlname:
 						htmlname = htmlname.replace('*','')
-						function = function.replace('*','\*')
+						#function = function.replace('*','\*')
 					if ' ' in htmlname:
 						htmlname = htmlname.replace(' ','')
 					#
@@ -102,7 +109,7 @@ with open(output + project +'.html','w') as projectFileHtml:
 					#
 					# Indicate that a new function has been started
 					#
-					creation = True ;
+					creation = True
 				#
 				# If file definition is found, end of header reached. End current function parsing
 				#
@@ -110,8 +117,20 @@ with open(output + project +'.html','w') as projectFileHtml:
 					creation = False
 					with open(htmlFileName, 'w') as htmlFile:
 						htmlFile.write(text)
+						htmlFile.write(markdown.markdown( '[' + headerFile + '](' +headerFilelink + '.html)'))
+					break
 				#
 				# If // found, description of function reached. Print description to file and carry on parsing
 				#
 				if '//' in line:
-					text = text + line.replace('//','')
+					if creation == False:
+						temp = line.replace('//','')
+						temp = temp.replace('<',' &#60 ')
+						temp = temp.replace('>',' &#62 ')
+						temp = temp.replace('|',' &#8739 ')
+						temp = temp
+						pretext = pretext + temp +'<br>'
+					else:
+						text = text + line.replace('//','')  +'<br>'
+
+			headFileHtml.write(markdown.markdown( '[' + project + '](' + project + '.html)'))
