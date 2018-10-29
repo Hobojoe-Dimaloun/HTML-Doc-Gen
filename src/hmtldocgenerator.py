@@ -110,6 +110,23 @@ with open(output + project +'.html','w') as projectFileHtml:
 					# Indicate that a new function has been started
 					#
 					creation = True
+<<<<<<< HEAD
+=======
+
+				#
+				# If // found, description of function reached. Print description to file and carry on parsing
+				#
+				if '//' in line:
+					if creation == False:
+						temp = line.replace('//','')
+						temp = temp.replace('<',' &#60 ')
+						temp = temp.replace('>',' &#62 ')
+						temp = temp.replace('|',' &#8739 ')
+						temp = temp
+						pretext = pretext + temp +'<br>'
+					else:
+						text = text + line.replace('//','')  +'<br>'
+>>>>>>> cb27c59928d17a1410805df58c75aec9ad21ea47
 				#
 				# If file definition is found, end of header reached. End current function parsing
 				#
@@ -117,6 +134,7 @@ with open(output + project +'.html','w') as projectFileHtml:
 					creation = False
 					with open(htmlFileName, 'w') as htmlFile:
 						htmlFile.write(text)
+<<<<<<< HEAD
 						htmlFile.write(markdown.markdown( '[' + headerFile + '](' +headerFilelink + '.html)'))
 					break
 				#
@@ -134,3 +152,5 @@ with open(output + project +'.html','w') as projectFileHtml:
 						text = text + line.replace('//','')  +'<br>'
 
 			headFileHtml.write(markdown.markdown( '[' + project + '](' + project + '.html)'))
+=======
+>>>>>>> cb27c59928d17a1410805df58c75aec9ad21ea47
