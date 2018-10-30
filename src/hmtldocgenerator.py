@@ -112,19 +112,6 @@ with open(output + project +'.html','w') as projectFileHtml:
 					creation = True
 
 				#
-				# If // found, description of function reached. Print description to file and carry on parsing
-				#
-				if '//' in line:
-					if creation == False:
-						temp = line.replace('//','')
-						temp = temp.replace('<',' &#60 ')
-						temp = temp.replace('>',' &#62 ')
-						temp = temp.replace('|',' &#8739 ')
-						temp = temp
-						pretext = pretext + temp +'<br>'
-					else:
-						text = text + line.replace('//','')  +'<br>'
-				#
 				# If file definition is found, end of header reached. End current function parsing
 				#
 				if '_H' in line and creation == True:
